@@ -67,6 +67,21 @@ describe('vinyl routes', () => {
 
     })
 
+    it('updates vinyl by ID', async () => {
+        const vinyl = await vinyl_model.insert({
+            artist: 'Nirvana',
+            album: 'Nevermind',
+            rel_year: 2001,
+            label: 'DGC Records',
+        });
+
+        const res = await request(app)
+            .put(`/api/v1/vinyl/${vinyl.id}`)
+            .send({ rel_year: 1991 })
+        
+        expect(res.body).toEqual({ ...vinyl, rel_year: 1991});
+    });
+
 
 
 
