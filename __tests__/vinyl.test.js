@@ -82,6 +82,21 @@ describe('vinyl routes', () => {
         expect(res.body).toEqual({ ...vinyl, rel_year: 1991});
     });
 
+    it('deletes vinyl by id', async () => {
+        const vinyl = await vinyl_model.insert({
+            artist: '311',
+            album: '311',
+            rel_year: 1995,
+            label: 'Capricorn',
+        });
+
+        const res = await request(app).delete(`/api/v1/vinyl/${vinyl.id}`);
+
+        expect(res.body).toEqual({
+            message: `${vinyl.artist} - ${vinyl.album} has been removed from the catalog.`
+        });
+    })
+
 
 
 
