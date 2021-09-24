@@ -2,9 +2,10 @@ DROP TABLE IF EXISTS vinyl;
 
 CREATE TABLE vinyl (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    artist TEXT NOT NULL,
-    album TEXT NOT NULL,
+    artist VARCHAR(256) NOT NULL,
+    album VARCHAR(256) NOT NULL,
     rel_year INTEGER NOT NULL,
-    label TEXT NOT NULL
+    label VARCHAR(256) NOT NULL
+    
 
 );
