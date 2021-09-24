@@ -39,6 +39,34 @@ describe('vinyl routes', () => {
         expect(res.body).toEqual(vinyl);
     })
 
+    it('gets all vinyl', async () => {
+        const firstVinyl = await vinyl_model.insert({
+            artist: 'Chevelle',
+            album: 'Wonder whats next',
+            rel_year: 2002,
+            label: 'Epic',
+        })
+        const secondVinyl = await vinyl_model.insert({
+            artist: 'The Knife',
+            album: 'Deep Cuts',
+            rel_year: 2002,
+            label: 'Rabid',
+        })
+        const thirdVinyl = await vinyl_model.insert({
+            artist: 'Silversun Pickups',
+            album: 'Swoon',
+            rel_year: 2010,
+            label: 'Danger Bird',
+        })
+
+        return request(app)
+            .get('/api/v1/vinyl/')
+            .then((res) => {
+                expect(res.body).toEqual([firstVinyl, secondVinyl, thirdVinyl ]);
+            });
+
+    })
+
 
 
 
